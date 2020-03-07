@@ -1,0 +1,58 @@
+%{
+    open TypeAST
+%}
+
+%token <string> ID
+%token <System.Int32> INT
+%token <System.Double> FLOAT
+%token IF FI DO OD SKIP FALSE TRUE ASSIGN ARROW LESSEQ GREATEQ NOTEQ EQUAL ANDSC ORSC AND OR PLUS TIMES DIV POW NOT LESS GREAT PSTART PEND BSTART BEND SEMI MINUS EOF
+
+// start
+%start start
+%type <Command> start
+%type <Command> Command
+%type <GCommand> GCommand
+%type <Arithm> Arithm
+%type <Boolean> Boolean
+
+%%
+start: Command EOF { $1 }
+
+Command : ID ASSIGN Arithm { Assign($1,$3) }
+        | ID BSTART Arithm BEND ASSIGN Arithm { ArrAssign($1,$3,$6) }
+        | SKIP { Skip }
+        | Command SEMI Command { Coms($1,$3) }
+        | IF GCommand FI { If($2) }
+        | DO GCommand OD { Do($2) }
+
+GCommand : Boolean ARROW Command { Gives($1,$3) }
+         | GCommand BSTART BEND GCommand { Else($1,$4) }
+
+Arithm : INT { Int($1) }
+       | FLOAT { Float($1) }
+       | ID { Val($1) }
+       | ID BSTART Arithm BEND { ArrVal($1,$3) }
+       | Arithm PLUS Arithm { Plus($1,$3) }
+       | Arithm MINUS Arithm { Minus($1,$3) }
+       | Arithm TIMES Arithm { Times($1,$3) }
+       | Arithm DIV Arithm { Div($1,$3) }
+       | MINUS Arithm { Neg($2) }
+       | Arithm POW Arithm { Pow($1,$3) }
+       | PSTART Arithm PEND { ParA($2) }
+
+Boolean : TRUE { True }
+        | FALSE { False }
+        | Boolean AND Boolean { And($1,$3) }
+        | Boolean OR Boolean { Or($1,$3) }
+        | Boolean ANDSC Boolean { AndSC($1,$3) }
+        | Boolean ORSC Boolean { OrSC($1,$3) }
+        | NOT Boolean { Not($2) }
+        | Arithm EQUAL Arithm { Equal($1,$3) }
+        | Arithm NOTEQ Arithm { Not(Equal($1,$3)) }
+        | Arithm GREAT Arithm { Greater($1,$3) }
+        | Arithm LESS Arithm { Lesser($1,$3) }
+        | Arithm GREATEQ Arithm { Or(Greater($1,$3),Equal($1,$3)) }
+        | Arithm LESSEQ Arithm { Or(Lesser($1,$3),Equal($1,$3)) }
+        | PSTART Boolean PEND { ParB($2) }
+
+%%
