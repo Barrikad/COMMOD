@@ -20,12 +20,14 @@ let parse input =
     let res = GCPParser.start GCPLexer.tokenize lexbuf
     res
 
-let rec printCom (com : Command) = match com with
-    | Assign(str,artm) -> printf "%s = " str
+let rec printCom (com : Command) = 
+    printf " ["
+    match com with
+    | Assign(str,artm) -> printf "%s := " str
                           printArtm artm
     | ArrAssign(str,artm1,artm2) -> printf "%s[" str
                                     printArtm artm1
-                                    printf "] = "
+                                    printf "] := "
                                     printArtm artm2
     | Skip -> printf "Skip "
     | If(gcom) -> printf "if "
@@ -35,14 +37,21 @@ let rec printCom (com : Command) = match com with
     | Coms(com1,com2) -> printCom com1
                          printf "; "
                          printCom com2
-and printGcom (gcom : GCommand) = match gcom with
+    printf "] "
+and printGcom (gcom : GCommand) =
+    printf " {"
+    match gcom with
     | Gives(bol, com) -> printBool bol
                          printf " -> "
                          printCom com
     | Else(gcom1,gcom2) -> printGcom gcom1
                            printf " [] "
                            printGcom gcom2
-and printArtm (artm : Arithm) = match artm with
+    printf "} "
+
+and printArtm (artm : Arithm) = 
+    printf " ("
+    match artm with
     | Int(x) -> printf "%i " x
     | Float(x) -> printf "%f " x
     | Val(str) -> printf "%s " str
@@ -70,9 +79,12 @@ and printArtm (artm : Arithm) = match artm with
     | ParA(artm) -> printf " ("
                     printArtm artm
                     printf ") "
-and printBool (bol : Boolean) = match bol with
-    | True -> printf "True "
-    | False -> printf "False "
+    printf ") "
+and printBool (bol : Boolean) = 
+    printf " <"
+    match bol with
+    | True -> printf " True "
+    | False -> printf " False "
     | AndSC(bol1,bol2) -> printBool bol1
                           printf " && "
                           printBool bol2
@@ -100,5 +112,6 @@ and printBool (bol : Boolean) = match bol with
     | Lesser(artm1,artm2) -> printArtm artm1
                              printf " < "
                              printArtm artm2
+    printf "> "
 
 printCom (parse "a := 3; if a = 3 -> a := a - 1 fi; skip ")
