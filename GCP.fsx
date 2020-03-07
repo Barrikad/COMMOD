@@ -73,9 +73,8 @@ and printArtm (artm : Arithm) =
     | Pow(artm1,artm2) -> printArtm artm1
                           printf " ^ "
                           printArtm artm2
-    | Neg(artm) -> printf "-("
+    | Neg(artm) -> printf "-"
                    printArtm artm
-                   printf ") "
     | ParA(artm) -> printf " ("
                     printArtm artm
                     printf ") "
@@ -97,9 +96,8 @@ and printBool (bol : Boolean) =
     | Or(bol1,bol2) -> printBool bol1
                        printf " | "
                        printBool bol2
-    | Not(bol) -> printf "!("
+    | Not(bol) -> printf "!"
                   printBool bol
-                  printf ") "
     | ParB(bol) -> printf "("
                    printBool bol
                    printf ") "
