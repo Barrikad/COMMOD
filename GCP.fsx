@@ -19,10 +19,13 @@ open GCPParser
 
 open GCPLexer
 
+let program = IO.File.ReadAllText "GCProgram.txt"
+
 let parse input =
     let lexbuf = LexBuffer<char>.FromString input
-    let res = GCPParser.start GCPLexer.tokenize lexbuf
+    let res = start tokenize lexbuf
     res
 
 
-printCom (parse "a := 3; if a = 3 -> a := a - 1 fi; skip ")
+printCom (parse program)
+printfn " "

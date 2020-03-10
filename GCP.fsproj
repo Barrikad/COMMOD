@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="C:\Users\simon\FsLexYacc.10.0.0\src\fslex\Lexing.fs" />
+    <Compile Include="C:\Users\simon\FsLexYacc.10.0.0\src\fsyacc\Parsing.fs" />
+    <Compile Include="TypeAST.fs" />
+    <Compile Include="PrintAST.fs" />
+    <Compile Include="GCPParser.fs" />
+    <Compile Include="GCPLexer.fs" />
+    <Compile Include="GCP.fsx" />
+    <Compile Include="Program.fs" />
+  </ItemGroup>
+</Project>
