@@ -7,7 +7,13 @@
 %token <System.Double> FLOAT
 %token IF FI DO OD SKIP FALSE TRUE ASSIGN ARROW LESSEQ GREATEQ NOTEQ EQUAL ANDSC ORSC AND OR PLUS TIMES DIV POW NOT LESS GREAT PSTART PEND BSTART BEND SEMI MINUS EOF
 
-// start
+%left PLUS MINUS
+%left TIMES DIV
+%right POW
+
+%left OR ORSC
+%left AND ANDSC
+
 %start start
 %type <Command> start
 %type <Command> Command
