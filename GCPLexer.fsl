@@ -5,7 +5,6 @@ open System
 open GCPParser
 open FSharp.Text.Lexing
 open System.Text
-
 }
 
 let char        = ['a'-'z' 'A'-'Z']
@@ -46,6 +45,7 @@ let brackEnd = ']'
 let semi = ';'
 let arrow = "->"
 
+
 rule tokenize = parse
     | if  {IF}
     | fi  {FI}
@@ -53,6 +53,7 @@ rule tokenize = parse
     | od  {OD}
     | whitespace  { tokenize lexbuf }
     | newline  { lexbuf.EndPos <- lexbuf.EndPos.NextLine; tokenize lexbuf; }
+    | minus {MINUS}
     | skip  {SKIP}
     | false  {FALSE}
     | true  {TRUE}
@@ -81,5 +82,4 @@ rule tokenize = parse
     | var  {ID(LexBuffer<_>.LexemeString lexbuf)}
     | decimal  {FLOAT(Double.Parse(LexBuffer<_>.LexemeString lexbuf))}
     | integer  {INT(Int32.Parse(LexBuffer<_>.LexemeString lexbuf))}
-    | minus  {MINUS}
     | eof {EOF}
