@@ -5,7 +5,7 @@
 %token <string> ID
 %token <System.Int32> INT
 %token <System.Double> FLOAT
-%token IF FI DO OD SKIP FALSE TRUE ASSIGN ARROW LESSEQ GREATEQ NOTEQ EQUAL ANDSC ORSC AND OR PLUS TIMES DIV POW NOT LESS GREAT PSTART PEND BSTART BEND SEMI MINUS UMINUS ELSEPREC EOF
+%token IF FI DO OD SKIP FALSE TRUE ASSIGN ARROW LESSEQ GREATEQ NOTEQ EQUAL ANDSC ORSC AND OR PLUS TIMES DIV POW NOT LESS GREAT PSTART PEND BSTART BEND SEMI MINUS UMINUS ELSEPREC EOF SYNTAXERROR ERROR
 
 %left PLUS MINUS
 %left TIMES DIV
@@ -30,15 +30,33 @@
 %%
 start: Command EOF { $1 }
 
-Command : ID ASSIGN Arithm { Assign($1,$3) }
+Command : ID ASSIGN Arithm                    { Assign($1,$3) }
         | ID BSTART Arithm BEND ASSIGN Arithm { ArrAssign($1,$3,$6) }
-        | SKIP { Skip }
-        | Command SEMI Command { Coms($1,$3) }
-        | IF GCommand FI { If($2) }
-        | DO GCommand OD { Do($2) }
+        | SKIP                                { Skip }
+        | Command SEMI Command                { Coms($1,$3) }
+        | IF GCommand FI                      { If($2) }
+        | DO GCommand OD                      { Do($2) }
 
-GCommand : Boolean ARROW Command { Gives($1,$3) }
+        | GCommand SEMI Command { Coms(CError("Expected Command not GCommand"),$3) }
+        | Command SEMI GCommand { Coms($1,CError("Expected Command not GCommand")) }
+        | Arithm SEMI Command   { Coms(CError("Expected Command not Arithmetic"),$3) }
+        | Command SEMI Arithm   { Coms($1,CError("Expected Command not Arithmetic")) }
+        | Boolean SEMI Command  { Coms(CError("Expected Command not Boolean"),$3) }
+        | Command SEMI Boolean  { Coms($1,CError("Expected Command not Boolean")) }
+        | IF Command FI         { CError("Expected GCommand not Command") }
+        | IF Boolean FI         { CError("Expected GCommand not Boolean") }
+        | IF Arithm FI          { CError("Expected GCommand not Arithmetic") }
+        | DO Command OD         { CError("Expected GCommand not Command") }
+        | DO Boolean OD         { CError("Expected GCommand not Boolean") }
+        | DO Arithm OD          { CError("Expected GCommand not Arithmetic") }
+        | IF GCommand           { CError("Expected FI") }
+        | DO GCommand           { CError("Expected OD") }
+        
+
+
+GCommand : Boolean ARROW Command                        { Gives($1,$3) }
          | GCommand BSTART BEND GCommand %prec ELSEPREC { Else($1,$4) }
+
 
 Arithm : INT { Int($1) }
        | FLOAT { Float($1) }
@@ -66,5 +84,6 @@ Boolean : TRUE { True }
         | Arithm GREATEQ Arithm { Or(Greater($1,$3),Equal($1,$3)) }
         | Arithm LESSEQ Arithm { Or(Lesser($1,$3),Equal($1,$3)) }
         | PSTART Boolean PEND { ParB($2) }
+
 
 %%

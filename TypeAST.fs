@@ -12,6 +12,7 @@ type Arithm =
     | Neg of Arithm
     | Pow of (Arithm*Arithm)
     | ParA of Arithm
+    | AError of string
 
 type Boolean =
     | True
@@ -25,10 +26,12 @@ type Boolean =
     | Greater of (Arithm*Arithm)
     | Lesser of (Arithm*Arithm)
     | ParB of Boolean
+    | BError of string
 
 type GCommand =
     | Gives of (Boolean*Command)
     | Else of (GCommand*GCommand)
+    | GError of string
 and Command =
     | Assign of (string*Arithm)
     | ArrAssign of (string*Arithm*Arithm)
@@ -36,3 +39,11 @@ and Command =
     | Coms of (Command*Command)
     | If of GCommand
     | Do of GCommand
+    | CError of string
+
+(*type Error =
+    | SyntaxError of char
+    | AError of char
+    | BError of char
+    | GError of char
+    | CError of char*)

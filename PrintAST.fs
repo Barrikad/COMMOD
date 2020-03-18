@@ -19,6 +19,7 @@ let rec printCom (com : Command) =
     | Coms(com1,com2) -> printCom com1
                          printf "; "
                          printCom com2
+    | CError(m) -> printf " /%s/ " m
     printf "] "
 and printGcom (gcom : GCommand) =
     printf " {"
@@ -29,6 +30,7 @@ and printGcom (gcom : GCommand) =
     | Else(gcom1,gcom2) -> printGcom gcom1
                            printf " [] "
                            printGcom gcom2
+    | GError(m) -> printf " /%s/ " m
     printf "} "
 
 and printArtm (artm : Arithm) = 
@@ -58,6 +60,7 @@ and printArtm (artm : Arithm) =
     | Neg(artm) -> printf "-"
                    printArtm artm
     | ParA(artm) -> printArtm artm
+    | AError(m) -> printf " /%s/ " m
     printf ") "
 and printBool (bol : Boolean) = 
     printf " <"
@@ -88,4 +91,5 @@ and printBool (bol : Boolean) =
     | Lesser(artm1,artm2) -> printArtm artm1
                              printf " < "
                              printArtm artm2
+    | BError(m) -> printf " /%s/ " m
     printf "> "
