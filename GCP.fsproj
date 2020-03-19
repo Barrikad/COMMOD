@@ -9,6 +9,7 @@
     <Compile Include="TypeAST.fs" />
     <Compile Include="PrintAST.fs" />
     <Compile Include="progGraph.fs" />
+    <Compile Include="PrintPG.fs" />
     <Compile Include="GCPParser.fs" />
     <Compile Include="GCPLexer.fs" />
     <Compile Include="GCP.fsx" />
