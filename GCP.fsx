@@ -26,5 +26,5 @@ let parse input =
     res
 
 
-printCom (parse program)
-printfn " "
+//printCom (parse program)
+//printfn " "

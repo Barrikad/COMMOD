@@ -17,8 +17,8 @@
 %left AND ANDSC
 %right NOT
 
-%right SEMI
 %right ELSEPREC
+%right SEMI
 
 %start start
 %type <Command> start

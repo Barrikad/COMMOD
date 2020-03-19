@@ -1,7 +1,3 @@
-a := 1 + -3 * 2; 
-
-
-
-true; 
-if a -> skip fi; 
-do true -> a = 1 od;
+if 2 < 3 -> a := 1 
+fi; 
+skip 
