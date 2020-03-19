@@ -9,26 +9,26 @@ let rec arithm2str (x : Arithm) =
     | Float (x) -> (string x)
     | Val (x) -> (string x)
     | ArrVal (a,b) -> a + "[" + arithm2str(b) + "]" 
-    | Plus (a,b) -> arithm2str (a) + "+" + arithm2str (b)
-    | Minus (a,b) -> arithm2str (a) + "-" + arithm2str (b)
-    | Times (a,b) -> arithm2str (a) + "*" + arithm2str (b)
-    | Div (a,b) -> arithm2str (a) + "/" + arithm2str (b)
-    | Neg (x) -> "-" + arithm2str (x)
+    | Plus (a,b) -> "(" + arithm2str (a) + "+" + arithm2str (b) + ")"
+    | Minus (a,b) -> "(" + arithm2str (a) + "-" + arithm2str (b) + ")"
+    | Times (a,b) -> "(" + arithm2str (a) + "*" + arithm2str (b) + ")"
+    | Div (a,b) -> "(" + arithm2str (a) + "/" + arithm2str (b) + ")"
+    | Neg (x) -> "(-" + arithm2str (x) + ")"
     | ParA (x) -> "(" + arithm2str(x) + ")"
-    | Pow (a,b) -> arithm2str (a) + "^" + arithm2str (b)
+    | Pow (a,b) -> "(" + arithm2str (a) + "^" + arithm2str (b)
     | AError a-> failwith "strange, an AError at this point?"
 
 let rec bool2str (x : Boolean) =
     match x with 
     | True -> "True"
     | False -> "False"
-    | And (a,b) -> bool2str (a) + " & " + bool2str (b)
-    | Or (a,b) -> bool2str (a) + " | " + bool2str (b)
-    | AndSC (a,b) -> bool2str (a) + " && " + bool2str (b)
-    | OrSC (a,b) -> bool2str (a) + " || " + bool2str (b)
-    | Equal (a,b) -> arithm2str (a) + "==" + arithm2str (b)
-    | Greater (a,b) -> arithm2str (a) + ">" + arithm2str (b)
-    | Lesser (a,b) -> arithm2str (a) + "<" + arithm2str (b)
+    | And (a,b) -> "(" + bool2str (a) + " & " + bool2str (b) + ")"
+    | Or (a,b) -> "(" + bool2str (a) + " | " + bool2str (b) + ")"
+    | AndSC (a,b) -> "(" + bool2str (a) + " && " + bool2str (b) + ")"
+    | OrSC (a,b) -> "(" + bool2str (a) + " || " + bool2str (b) + ")"
+    | Equal (a,b) -> "(" + arithm2str (a) + "==" + arithm2str (b) + ")"
+    | Greater (a,b) -> "(" + arithm2str (a) + ">" + arithm2str (b) + ")"
+    | Lesser (a,b) -> "(" + arithm2str (a) + "<" + arithm2str (b) + ")"
     | Not (a) -> "!" + bool2str(a) 
     | ParB (x) -> "(" + bool2str(x) + ")"
     | BError a-> failwith "strange, an BError at this point?"
