@@ -18,6 +18,9 @@ open GCPLexer
 #load "progGraph.fs"
 open progGraph
 
+#load "PrintPG.fs"
+open PrintPG
+
 let program = IO.File.ReadAllText "GCProgram.txt"
 
 let parse input =
@@ -26,5 +29,5 @@ let parse input =
     res
 
 
-printCom (parse program)
+printPG (AST2PG (parse program) false)
 printfn " "
