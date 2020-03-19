@@ -1,21 +1,8 @@
 module PrintPG
 
+open progGraph
 open TypeAST
 
-type Action =
-    | BoolAct of Boolean
-    | ArithmAct of Arithm
-    | CommandAct of Command
-    | GCommandAct of GCommand
-
-type nodes = 
-    | Start
-    | End
-    | Node of int
-
-type Edge =
-    | S of (nodes*Action*nodes)
-    
 let rec arithm2str (x : Arithm) =
     match x with 
     | Int (x) -> (string x)
@@ -63,27 +50,26 @@ and GCommand2str (x : GCommand) =
 
 let act2str = function
     | BoolAct (x) -> bool2str (x)
-    | ArithmAct (x) -> arithm2str (x)
     | CommandAct (x) -> Command2str (x)
     | GCommandAct (x) -> GCommand2str (x)
 
 let toDOT (x) =
     match x with
-    | S (Start,b,End) -> 
+    | (StartNode,b,EndNode) -> 
         "q▷ -> q◀ [label = \"" + act2str(b) + "\"];" 
-    | S (Start,b,Node c) ->  
+    | (StartNode,b,MidNode c) ->  
         "q▷ -> q" + string(c) + " [label = \"" + act2str(b) + "\"];" 
-    | S (Node a,b,End) -> 
+    | (MidNode a,b,EndNode) -> 
         "q" + string(a) + " -> q◀ [label = \"" + act2str(b) + "\"];" 
-    | S (Node a,b,Node c) ->  
+    | (MidNode a,b,MidNode c) ->  
         "q" + string(a) + " -> q" + string(c) + " [label = \"" + act2str(b) + "\"];" 
     | _ -> failwith "Incorrect Edges"
 
-let rec edge2string (l : Edge list) =
+let rec edge2string (l : (Node*Action*Node) list) =
     match l with 
     | x::tail -> toDOT(x) + "\n" + edge2string tail
     | [] -> ""
 
 let toList s = Set.fold (fun l se -> se::l) [] s
 
-let printPG (l : Set<Edge>) = printf "digraph PG {rankdir=LR; \nnode [shape = doublecircle]; q◀; \nnode [shape = circle]; q▷ ; \n%s}" (edge2string (toList(l))) |> ignore  
+let printPG (l : Set<(Node*Action*Node)>) = printf "digraph PG {rankdir=LR; \nnode [shape = doublecircle]; q◀; \nnode [shape = circle]; q▷ ; \n%s}" (edge2string (toList(l))) |> ignore  
