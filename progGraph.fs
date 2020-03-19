@@ -40,7 +40,13 @@ and commands currNode nextNode out = function
                                   let holder = commands currNode x out command1
                                   commands x nextNode holder command2
     | If(gcom) -> guardedCommands currNode nextNode out gcom
+<<<<<<< HEAD
     | Do(gcom)-> let (bool,com) = gcom
                  let holder = guardedCommands currNode currNode out gcom
                  Set.add (currNode,BoolAct(Not bool),nextNode) holder
+=======
+    | Do(gcom)-> match gcom with
+                 | Gives(bool,com) -> let holder = guardedCommands currNode currNode out gcom
+                                      Set.add (currNode,BoolAct(Not bool),nextNode) holder
+>>>>>>> 599138ba0c9f9566b5f24b4aa97910ee35d07d5c
                
