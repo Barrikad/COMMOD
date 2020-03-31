@@ -55,13 +55,14 @@ and execBool mem boolean : bool option =
     | False -> Some false
     | And (a, b) -> booleanOpToBoolExp a b ( && ) mem
     | Or (a, b) -> booleanOpToBoolExp a b ( || ) mem
-    | AndSC (a, b) -> booleanOpToBoolExp a b ( && ) mem
-    | OrSC (a, b) -> booleanOpToBoolExp a b ( || ) mem
+    | AndSC (a, b) -> (if (execBool mem a) = Some true then (if (execBool mem b) = Some true then Some true else Some false) else Some false)
+    | OrSC (a, b) -> (if (execBool mem a) = Some true then Some true else (if (execBool mem b) = Some true then Some true else Some false))
     | Not (a) -> if execBool mem a = Some true then Some false else Some true
     | Equal (a, b) -> booleanOpToArtmExp a b ( = ) mem
     | Greater (a, b) -> booleanOpToArtmExp a b ( > ) mem
     | Lesser (a, b) -> booleanOpToArtmExp a b ( < ) mem
     | ParB (a) -> execBool mem a
     | BError a -> None
+
 
 
