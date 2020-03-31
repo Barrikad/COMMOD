@@ -4,11 +4,6 @@ open TypeAST
 
 exception ErrorInTree of string
 
-type Node = 
-    | StartNode
-    | EndNode
-    | MidNode of int
-
 type Action =
     | BoolAct of Boolean
     | CommandAct of Command
@@ -52,7 +47,12 @@ let AST2PG ast deterministic =
     
     
     
-    (*let rec guardedCommands currNode nextNode out = function
+    (*type Node = 
+    | StartNode
+    | EndNode
+    | MidNode of int
+    
+    let rec guardedCommands currNode nextNode out = function
         | Gives(guard, command) -> let x = appendNode currNode
                                    let y = Set.add (currNode, BoolAct(guard), x) out
                                    commands x nextNode y command

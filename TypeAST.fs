@@ -41,6 +41,20 @@ and Command =
     | Do of GCommand
     | CError of string
 
+//Further code for Interpreter
+type Node = 
+    | StartNode
+    | EndNode
+    | MidNode of int
+
+type Memory = Map<string, int>
+
+type State = 
+    | Stuck      of Node * Memory
+    | Terminated of Memory
+
+//End Interpreter code
+
 (*type Error =
     | SyntaxError of char
     | AError of char
