@@ -5,7 +5,7 @@ open FSharp.Text.Lexing
 open FSharp.Text.Parsing.ParseHelpers
 # 1 "GCPParser.fsp"
 
-    open TypeAST
+    open ASTType
 
 # 10 "GCPParser.fs"
 // This type is the type of tokens accepted by the parser
