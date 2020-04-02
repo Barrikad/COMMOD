@@ -1,5 +1,5 @@
 %{
-    open ASTType
+    open Type
 %}
 
 %token <string> ID

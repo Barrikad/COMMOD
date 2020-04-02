@@ -1,7 +1,7 @@
-module GCPExecution
+module Execution
 
-open ASTType
-open GCPProgramGraph
+open Types
+open ProgramGraph
 
 exception ErrorInPGException of string      
 
@@ -11,16 +11,13 @@ let rec execArtm mem arithm =
     | Float x        -> (int x)
     | Val str         -> Map.find str (fst mem)
     | ArrVal(str, exp) -> List.item (execArtm mem exp) (Map.find str (snd mem))
-
     | Plus (x1, x2)  -> (execArtm mem x1) + (execArtm mem x2)
     | Minus (x1, x2) -> (execArtm mem x1) - (execArtm mem x2)
     | Times (x1, x2) -> (execArtm mem x1) * (execArtm mem x2)
     | Div (x1, x2)   -> (execArtm mem x1) / (execArtm mem x2)
-    | Neg x          -> - (execArtm mem x)
-                            
+    | Neg x          -> -(execArtm mem x)
     | ParA x         -> execArtm mem x
     | Pow (x1, x2)   -> (int(float(execArtm mem x1) ** float(execArtm mem x2)))
-                             
     | AError _ -> raise (ErrorInPGException("Can not interpret erroneous PG"))
 
 
@@ -46,7 +43,6 @@ let rec execBool mem boolean =
     | BError _ -> raise (ErrorInPGException("Can not interpret erroneous PG"))
 
 let rec execCom mem com =
-
     let rec replaceItem list index newElement curIndex = 
         match list with
         | _::xs when curIndex = index -> newElement :: xs

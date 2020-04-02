@@ -1,7 +1,7 @@
 module PrintExecution
 
 open System
-open ASTType
+open Types
 
 let printMem mem =
     let valFold _ str value = printfn "%s: %i" str value
@@ -12,7 +12,6 @@ let printMem mem =
                        listPrint ys (int + 1)
             | [] -> ()
         listPrint list 0
-
     let printValMem mem = Map.fold valFold () mem
     let printArrMem mem = Map.fold arrFold () mem
 
@@ -30,7 +29,6 @@ let rec printExec configs =
                    printfn "Node: %s" node
                    printMem mem
                    printfn ""
-
     | (q,mem)::xs -> let node = match q with
                                 | StartNode -> "q▷"
                                 | EndNode -> "q◀"

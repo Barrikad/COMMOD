@@ -1,7 +1,7 @@
 module PrintPG
 
-open GCPProgramGraph
-open ASTType
+open ProgramGraph
+open Types
 
 let rec arithm2str (x : Arithm) =
     match x with 

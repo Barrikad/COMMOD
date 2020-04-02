@@ -3,8 +3,8 @@
 open FSharp.Text.Lexing
 open System
 
-#load "ASTType.fs"
-open ASTType
+#load "Types.fs"
+open Types
 
 #load "PrintAST.fs"
 open PrintAST
@@ -15,13 +15,13 @@ open GCPParser
 #load "GCPLexer.fs"
 open GCPLexer
 
-#load "GCPProgramGraph.fs"
-open GCPProgramGraph
+#load "ProgramGraph.fs"
+open ProgramGraph
 
-#load "GCPExecution.fs"
-open GCPExecution
+#load "Execution.fs"
+open Execution
 
-#load "GCPInterpreter.fs"
+#load "Interpreter.fs"
 open Interpreter
 
 #load "PrintPG.fs"

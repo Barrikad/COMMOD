@@ -1,4 +1,4 @@
-module ASTType
+module Types
 
 type Arithm =
     | Int of int
