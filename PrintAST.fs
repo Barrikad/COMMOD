@@ -1,6 +1,6 @@
 module PrintAST
 
-open TypeAST
+open ASTType
 
 let rec printCom (com : Command) = 
     printf " ["

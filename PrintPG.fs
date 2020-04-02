@@ -1,7 +1,7 @@
 module PrintPG
 
-open progGraph
-open TypeAST
+open GCPProgramGraph
+open ASTType
 
 let rec arithm2str (x : Arithm) =
     match x with 
@@ -51,7 +51,6 @@ and GCommand2str (x : GCommand) =
 let act2str = function
     | BoolAct (x) -> bool2str (x)
     | CommandAct (x) -> Command2str (x)
-    | GCommandAct (x) -> GCommand2str (x)
 
 let toDOT (x) =
     match x with
