@@ -18,6 +18,7 @@
     <Compile Include="PrintAST.fs" />
     <Compile Include="PrintPG.fs" />
     <Compile Include="PrintExecution.fs" />
+    <Compile Include="PrintSA.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 </Project>

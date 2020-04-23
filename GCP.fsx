@@ -36,12 +36,17 @@ open PrintPG
 #load "PrintExecution.fs"
 open PrintExecution
 
+#load "PrintSA.fs"
+open PrintSA
+
 let program = IO.File.ReadAllText "GCProgram.txt"
 
 let parse input =
     let lexbuf = LexBuffer<char>.FromString input
     let res = start tokenize lexbuf
     res
+    
+let map2List map = Map.fold (fun xs key value -> (key,value)::xs) [] map
 
 
 let pg = AST2PG (parse program) false
