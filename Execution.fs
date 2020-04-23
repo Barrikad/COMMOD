@@ -2,13 +2,11 @@ module Execution
 
 open Types
 open ProgramGraph
-
-exception ErrorInPGException of string      
+   
 
 let rec execArtm mem arithm =
     match arithm with
     | Int x          -> x
-    | Float x        -> (int x)
     | Val str         -> Map.find str (fst mem)
     | ArrVal(str, exp) -> List.item (execArtm mem exp) (Map.find str (snd mem))
     | Plus (x1, x2)  -> (execArtm mem x1) + (execArtm mem x2)

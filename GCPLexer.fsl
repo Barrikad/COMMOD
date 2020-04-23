@@ -81,6 +81,5 @@ rule tokenize = parse
     | brackEnd  {BEND}
     | semi  {SEMI}
     | var  {ID(LexBuffer<_>.LexemeString lexbuf)}
-    | decimal  {FLOAT(Double.Parse(LexBuffer<_>.LexemeString lexbuf))}
     | integer  {INT(Int32.Parse(LexBuffer<_>.LexemeString lexbuf))}
     | eof {EOF}

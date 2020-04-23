@@ -12,6 +12,8 @@
     <Compile Include="ProgramGraph.fs" />
     <Compile Include="Execution.fs" />
     <Compile Include="Interpreter.fs" />
+    <Compile Include="OperatorSigns.fs" />
+    <Compile Include="SignAnalyser.fs" />
     <Compile Include="PrintAST.fs" />
     <Compile Include="PrintPG.fs" />
     <Compile Include="PrintExecution.fs" />

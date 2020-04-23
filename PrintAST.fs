@@ -37,7 +37,6 @@ and printArtm (artm : Arithm) =
     printf " ("
     match artm with
     | Int(x) -> printf "%i " x
-    | Float(x) -> printf "%f " x
     | Val(str) -> printf "%s " str
     | ArrVal(str,artm) -> printf "%s[" str
                           printArtm artm

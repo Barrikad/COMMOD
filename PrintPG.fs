@@ -6,7 +6,6 @@ open Types
 let rec arithm2str (x : Arithm) =
     match x with 
     | Int (x) -> (string x)
-    | Float (x) -> (string x)
     | Val (x) -> (string x)
     | ArrVal (a,b) -> a + "[" + arithm2str(b) + "]" 
     | Plus (a,b) -> "(" + arithm2str (a) + "+" + arithm2str (b) + ")"

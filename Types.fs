@@ -1,8 +1,10 @@
 module Types
 
+exception ErrorInPGException of string   
+exception ErrorInAbsMemException of string
+
 type Arithm =
     | Int of int
-    | Float of float
     | Val of string
     | ArrVal of (string*Arithm)
     | Plus of (Arithm*Arithm)
@@ -55,9 +57,14 @@ type State =
 
 //End Interpreter code
 
-(*type Error =
-    | SyntaxError of char
-    | AError of char
-    | BError of char
-    | GError of char
-    | CError of char*)
+//Type for sign analysis
+
+type Sign =
+    | Positive
+    | Negative
+    | Zero
+
+type SignAssignment =
+    | VarSign of Sign
+    | ArrSign of Set<Sign>
+
