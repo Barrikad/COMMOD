@@ -24,6 +24,12 @@ open Execution
 #load "Interpreter.fs"
 open Interpreter
 
+#load "OperatorSigns.fs"
+#load "SignAnalyser.fs"
+
+#load "ProgramGraphSignAnalyser.fs"
+open PGSigns
+
 #load "PrintPG.fs"
 open PrintPG
 
@@ -39,5 +45,6 @@ let parse input =
 
 
 let pg = AST2PG (parse program) false
-printPG pg
-printExec (traversePG pg (Map.ofList [("i",0);("x",0);("y",0)], Map.ofList [("A",[-1;2;3;1;-2;4;5;7;2;-3])]))
+//printPG pg
+printCom (parse program)
+let signs = signsInPG (Map.ofList [("i",VarSign Positive);("x",VarSign Zero);("y",VarSign Zero);("A", ArrSign (((Set.empty.Add Zero).Add Negative).Add Positive))]) pg

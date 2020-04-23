@@ -4,10 +4,6 @@ open Types
 
 exception ErrorInTreeException of string
 
-type Action =
-    | BoolAct of Boolean
-    | CommandAct of Command
-
 
 let rec doneGCommand gcom =
     match gcom with

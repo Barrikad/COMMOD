@@ -43,6 +43,10 @@ and Command =
     | Do of GCommand
     | CError of string
 
+type Action =
+    | BoolAct of Boolean
+    | CommandAct of Command
+
 //Further code for Interpreter
 type Node = 
     | StartNode
