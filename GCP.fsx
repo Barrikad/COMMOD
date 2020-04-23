@@ -27,6 +27,9 @@ open Interpreter
 #load "OperatorSigns.fs"
 #load "SignAnalyser.fs"
 
+#load "initSignAnalyser.fs"
+open InitSigns
+
 #load "ProgramGraphSignAnalyser.fs"
 open PGSigns
 
@@ -48,8 +51,7 @@ let parse input =
     
 let map2List map = Map.fold (fun xs key value -> (key,value)::xs) [] map
 
-
 let pg = AST2PG (parse program) false
 //printPG pg
 printCom (parse program)
-let signs = signsInPG (Map.ofList [("i",VarSign Positive);("x",VarSign Zero);("y",VarSign Zero);("A", ArrSign (((Set.empty.Add Zero).Add Negative).Add Positive))]) pg
+let signs = signsInPG getInit pg

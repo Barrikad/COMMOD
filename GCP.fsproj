@@ -15,6 +15,7 @@
     <Compile Include="OperatorSigns.fs" />
     <Compile Include="SignAnalyser.fs" />
     <Compile Include="ProgramGraphSignAnalyser.fs" />
+    <Compile Include="initSignAnalyser.fs" />
     <Compile Include="PrintAST.fs" />
     <Compile Include="PrintPG.fs" />
     <Compile Include="PrintExecution.fs" />
