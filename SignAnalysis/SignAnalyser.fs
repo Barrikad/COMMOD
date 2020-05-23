@@ -19,10 +19,10 @@ let powerSetSign signSet1 signSet2 operatorSign = Set.fold (fun signSetX signX -
 let rec artmSign abstractMemory artm =
     match artm with
     | Int x          -> if x > 0 then Set.empty.Add Positive else if x < 0 then Set.empty.Add Negative else Set.empty.Add Zero
-    | Val str         -> match (Map.find str abstractMemory) with
+    | Var str         -> match (Map.find str abstractMemory) with
                          | VarSign s -> Set.empty.Add s 
                          | _ -> raise (ErrorInAbsMemException "Variable interpreted as array")
-    | ArrVal(str, exp) -> match (Map.find str abstractMemory) with
+    | Arr(str, exp) -> match (Map.find str abstractMemory) with
                           | ArrSign s -> if Set.isEmpty (Set.intersect (artmSign abstractMemory exp) ((Set.empty.Add Positive).Add Zero)) then Set.empty else s
                           | _ -> raise (ErrorInAbsMemException "Array interpreted as variable")
     | Plus (x1, x2)  -> powerSetSign (artmSign abstractMemory x1) (artmSign abstractMemory x2) plusSign
@@ -30,7 +30,6 @@ let rec artmSign abstractMemory artm =
     | Times (x1, x2) -> powerSetSign (artmSign abstractMemory x1) (artmSign abstractMemory x2) timesSign
     | Div (x1, x2)   -> powerSetSign (artmSign abstractMemory x1) (artmSign abstractMemory x2) divSign
     | Neg x          -> unaryMinusSign (artmSign abstractMemory x)
-    | ParA x         -> artmSign abstractMemory x
     | Pow (x1, x2)   -> powerSetSign (artmSign abstractMemory x1) (artmSign abstractMemory x2) powSign
     | AError _ -> raise (ErrorInPGException "Can not interpret erroneous PG")
 
@@ -46,7 +45,6 @@ let rec booleanSign abstractMemory boolean =
     | Equal (a, b) -> powerSetSign (artmSign abstractMemory a) (artmSign abstractMemory b) equalSign
     | Greater (a, b) -> powerSetSign (artmSign abstractMemory a) (artmSign abstractMemory b) greaterSign
     | Lesser (a, b) -> powerSetSign (artmSign abstractMemory a) (artmSign abstractMemory b) lesserSign
-    | ParB (a) -> booleanSign abstractMemory a
     | BError _ -> raise (ErrorInPGException("Can not interpret erroneous PG"))
 
 let addSign str sign abstractMemory = 

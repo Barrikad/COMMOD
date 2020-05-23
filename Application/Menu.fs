@@ -6,6 +6,9 @@ open ASTConstructor
 open ProgramGraph
 open Initializer
 open Interpreter
+open InitSigns
+open PGSigns
+open PrintSA
 open PrintPG
 open PrintExecution
 
@@ -53,6 +56,11 @@ let private stepWiseChoice pg =
     printfn "Steps of execution:"
     printExec (traversePG pg initialMemory)
 
+let private signChoice pg =
+    printfn "\nFor this analysis to work correctly, initial signs has to be defined in the file \"initialSigns.txt\"."
+    printfn "Possible sign configurations:"
+    printSA (signsInPG getInit pg)
+
 let startDialogue = 
     let determinism = welcome
     let analysis = chooseAnalysis
@@ -69,3 +77,6 @@ let startDialogue =
     elif analysis = "4" then
         let PG = AST2PG AST (determinism = "d")
         stepWiseChoice PG
+    elif analysis = "5" then
+        let PG = AST2PG AST (determinism = "d")
+        signChoice PG

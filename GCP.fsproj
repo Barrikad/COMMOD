@@ -14,9 +14,14 @@
     <Compile Include="Interpreter\Actions.fs" />
     <Compile Include="Interpreter\Interpreter.fs" />
     <Compile Include="Interpreter\Initializer.fs" />
+    <Compile Include="SignAnalysis\OperatorSigns.fs" />
+    <Compile Include="SignAnalysis\initSignAnalyser.fs" />
+    <Compile Include="SignAnalysis\SignAnalyser.fs" />
+    <Compile Include="SignAnalysis\ProgramGraphSignAnalyser.fs" />
     <Compile Include="Printer\PrintAST.fs" />
     <Compile Include="Printer\PrintPG.fs" />
     <Compile Include="Printer\PrintExecution.fs" />
+    <Compile Include="Printer\PrintSA.fs" />
     <Compile Include="Application\Menu.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>

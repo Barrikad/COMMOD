@@ -1,7 +1,6 @@
 module PGSigns
 
 open SignAnalyser
-open ProgramGraph
 open Interpreter
 open Types
 
