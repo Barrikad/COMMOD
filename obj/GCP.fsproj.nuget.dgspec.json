@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\simon\\Documents\\4. sem\\COMMOD\\GCP\\COMMOD\\GCP.fsproj": {}
+    "C:\\Users\\simon\\Documents\\4. sem\\COMMOD\\GCP\\COMMOD\\GCP.fsproj": {}
   },
   "projects": {
-    "c:\\Users\\simon\\Documents\\4. sem\\COMMOD\\GCP\\COMMOD\\GCP.fsproj": {
+    "C:\\Users\\simon\\Documents\\4. sem\\COMMOD\\GCP\\COMMOD\\GCP.fsproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\simon\\Documents\\4. sem\\COMMOD\\GCP\\COMMOD\\GCP.fsproj",
+        "projectUniqueName": "C:\\Users\\simon\\Documents\\4. sem\\COMMOD\\GCP\\COMMOD\\GCP.fsproj",
         "projectName": "GCP",
-        "projectPath": "c:\\Users\\simon\\Documents\\4. sem\\COMMOD\\GCP\\COMMOD\\GCP.fsproj",
+        "projectPath": "C:\\Users\\simon\\Documents\\4. sem\\COMMOD\\GCP\\COMMOD\\GCP.fsproj",
         "packagesPath": "C:\\Users\\simon\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\simon\\Documents\\4. sem\\COMMOD\\GCP\\COMMOD\\obj\\",
+        "outputPath": "C:\\Users\\simon\\Documents\\4. sem\\COMMOD\\GCP\\COMMOD\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\simon\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -33,7 +33,8 @@
           "dependencies": {
             "FSharp.Core": {
               "target": "Package",
-              "version": "[4.7.0, )"
+              "version": "[4.7.0, )",
+              "generatePathProperty": true
             }
           },
           "imports": [
@@ -51,7 +52,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

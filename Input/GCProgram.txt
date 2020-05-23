@@ -1,0 +1,9 @@
+i:=0;
+x:=0;
+y:=0;
+do i<10 -> if true -> x:=x+A[i];
+                      i:=i+1
+           [] true -> i:=i+1
+           fi;
+           y:=y+1
+od

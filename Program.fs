@@ -1,7 +1,8 @@
 ﻿module Program
 open System
+open Menu
 
 [<EntryPoint>]
 let main argv =
-    printfn "Hello World from F#!"
-    0 // return an integer exit code
+    startDialogue
+    0

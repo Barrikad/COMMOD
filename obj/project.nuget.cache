@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "58RxLch0v8ig1k3tgmq+wabI76JNSk9K9lV4W4+1bxD6ofbdclQ6G+YAmiEdZN3AvdEu98xA5ISZfEWpTfE8NQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\simon\\Documents\\4. sem\\COMMOD\\GCP\\COMMOD\\GCP.fsproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\simon\\.nuget\\packages\\fsharp.core\\4.7.0\\fsharp.core.4.7.0.nupkg.sha512"
+  ],
+  "logs": []
+}

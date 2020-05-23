@@ -1,0 +1,85 @@
+{
+module Lexer
+
+open System
+open Parser
+open FSharp.Text.Lexing
+open System.Text
+}
+
+let char        = ['a'-'z' 'A'-'Z']
+let digit       = ['0'-'9']
+let integer = digit*
+let decimal = digit* '.' digit*
+let whitespace  = [' ' '\n' '\r' '\t']
+let newline     = "\n\r" | '\n' | '\r'
+let var = char (char|digit|['_'])*
+let if = "if" whitespace
+let fi = whitespace "fi"
+let do = "do" whitespace
+let od = whitespace "od"
+let skip = "skip"
+let false = "false"
+let true = "true"
+let not = '!'
+let andNV = '&'
+let andSC = "&&"
+let or = '|'
+let orSC = "||"
+let plus = '+'
+let minus = '-'
+let times = '*'
+let div = '/'
+let pow = '^'
+let assign = ":="
+let equals = '='
+let notEquals = "!="
+let lesser = '<'
+let greater = '>'
+let lesserEqual = "<="
+let greaterEqual = ">="
+let parStart = '('
+let parEnd = ')'
+let brackStart = '['
+let brackEnd = ']'
+let semi = ';'
+let arrow = "->"
+
+
+rule tokenize = parse
+    | if  {IF}
+    | fi  {FI}
+    | do  {DO}
+    | od  {OD}
+    | brackStart brackEnd {ELSE}
+    | whitespace  { tokenize lexbuf }
+    | newline  { lexbuf.EndPos <- lexbuf.EndPos.NextLine; tokenize lexbuf; }
+    | minus {MINUS}
+    | skip  {SKIP}
+    | false  {FALSE}
+    | true  {TRUE}
+    | assign  {ASSIGN}
+    | arrow  {ARROW}
+    | lesserEqual  {LESSEQ}
+    | greaterEqual  {GREATEQ}
+    | notEquals  {NOTEQ}
+    | equals  {EQUAL}
+    | andSC  {ANDSC}
+    | orSC  {ORSC}
+    | andNV  {AND}
+    | or  {OR}
+    | plus  {PLUS}
+    | times  {TIMES}
+    | div  {DIV}
+    | pow  {POW}
+    | not  {NOT}
+    | lesser  {LESS}
+    | greater  {GREAT}
+    | parStart  {PSTART}
+    | parEnd  {PEND}
+    | brackStart  {BSTART}
+    | brackEnd  {BEND}
+    | semi  {SEMI}
+    | var  {ID(LexBuffer<_>.LexemeString lexbuf)}
+    | integer  {INT(Int32.Parse(LexBuffer<_>.LexemeString lexbuf))}
+    | eof {EOF}

@@ -6,20 +6,18 @@
   <ItemGroup>
     <Compile Include="C:\Users\simon\FsLexYacc.10.0.0\src\fslex\Lexing.fs" />
     <Compile Include="C:\Users\simon\FsLexYacc.10.0.0\src\fsyacc\Parsing.fs" />
-    <Compile Include="Types.fs" />
-    <Compile Include="GCPParser.fs" />
-    <Compile Include="GCPLexer.fs" />
-    <Compile Include="ProgramGraph.fs" />
-    <Compile Include="Execution.fs" />
-    <Compile Include="Interpreter.fs" />
-    <Compile Include="OperatorSigns.fs" />
-    <Compile Include="SignAnalyser.fs" />
-    <Compile Include="ProgramGraphSignAnalyser.fs" />
-    <Compile Include="initSignAnalyser.fs" />
-    <Compile Include="PrintAST.fs" />
-    <Compile Include="PrintPG.fs" />
-    <Compile Include="PrintExecution.fs" />
-    <Compile Include="PrintSA.fs" />
+    <Compile Include="Semantics\Types.fs" />
+    <Compile Include="Parser\Parser.fs" />
+    <Compile Include="Parser\Lexer.fs" />
+    <Compile Include="Parser\ASTConstructor.fs" />
+    <Compile Include="ProgramGraph\ProgramGraph.fs" />
+    <Compile Include="Interpreter\Actions.fs" />
+    <Compile Include="Interpreter\Interpreter.fs" />
+    <Compile Include="Interpreter\Initializer.fs" />
+    <Compile Include="Printer\PrintAST.fs" />
+    <Compile Include="Printer\PrintPG.fs" />
+    <Compile Include="Printer\PrintExecution.fs" />
+    <Compile Include="Application\Menu.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 </Project>
