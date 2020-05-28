@@ -1,0 +1,4 @@
+public < bob
+bob < shared
+public < alice 
+alice < shared

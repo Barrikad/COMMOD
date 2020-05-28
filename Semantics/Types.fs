@@ -64,4 +64,3 @@ type Sign =
 type SignAssignment =
     | VarSign of Sign
     | ArrSign of Set<Sign>
-

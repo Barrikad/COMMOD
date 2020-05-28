@@ -1,0 +1,4 @@
+i = shared
+y = alice
+x = bob
+A = bob

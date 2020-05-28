@@ -4,8 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="C:\Users\simon\FsLexYacc.10.0.0\src\fslex\Lexing.fs" />
-    <Compile Include="C:\Users\simon\FsLexYacc.10.0.0\src\fsyacc\Parsing.fs" />
+    <Compile Include="FsLexYacc.10.0.0\src\fslex\Lexing.fs" />
+    <Compile Include="FsLexYacc.10.0.0\src\fsyacc\Parsing.fs" />
     <Compile Include="Semantics\Types.fs" />
     <Compile Include="Parser\Parser.fs" />
     <Compile Include="Parser\Lexer.fs" />
@@ -18,10 +18,14 @@
     <Compile Include="SignAnalysis\initSignAnalyser.fs" />
     <Compile Include="SignAnalysis\SignAnalyser.fs" />
     <Compile Include="SignAnalysis\ProgramGraphSignAnalyser.fs" />
+    <Compile Include="Security\InitSecurity.fs" />
+    <Compile Include="Security\SecurityTransitions.fs" />
+    <Compile Include="Security\Security.fs" />
     <Compile Include="Printer\PrintAST.fs" />
     <Compile Include="Printer\PrintPG.fs" />
     <Compile Include="Printer\PrintExecution.fs" />
     <Compile Include="Printer\PrintSA.fs" />
+    <Compile Include="Printer\PrintSec.fs" />
     <Compile Include="Application\Menu.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>

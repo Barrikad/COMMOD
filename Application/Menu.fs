@@ -8,6 +8,10 @@ open Initializer
 open Interpreter
 open InitSigns
 open PGSigns
+open InitSecurity
+open SecurityTransitions
+open Security
+open PrintSec
 open PrintSA
 open PrintPG
 open PrintExecution
@@ -61,6 +65,31 @@ let private signChoice pg =
     printfn "Possible sign configurations:"
     printSA (signsInPG getInit pg)
 
+let private secChoice pg =
+    let actualFlows = flowsInPG pg
+    let vios = violations actualFlows
+    printfn "\nFor this analysis to work correctly, lattices and classifications has to be defined in the file corresponding files."
+    printfn "Allowed flows:"
+    printFlows allowedFlows
+    printfn "--------------"
+    printfn "\nActual flows:"
+    printFlows actualFlows
+    printfn "--------------"
+    printfn "\nViolations:"
+    printViolations vios
+    printfn "--------------"
+    
+    if Set.isEmpty vios then
+        printfn "\nThe program is secure"
+    else
+        printfn "\nThe program has security violations"
+
+    printfn "\n"
+
+
+let private modelChoice pg =
+    printfn "Not yet implemented"
+
 let startDialogue = 
     let determinism = welcome
     let analysis = chooseAnalysis
@@ -80,3 +109,9 @@ let startDialogue =
     elif analysis = "5" then
         let PG = AST2PG AST (determinism = "d")
         signChoice PG
+    elif analysis = "6" then
+        let PG = AST2PG AST (determinism = "d")
+        secChoice PG
+    elif analysis = "7" then
+        let PG = AST2PG AST (determinism = "d")
+        modelChoice PG
