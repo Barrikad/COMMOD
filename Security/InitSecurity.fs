@@ -28,7 +28,8 @@ let rec private allDescendants map key =
     | None -> Set.empty
     | Some s -> Set.union s (Set.fold (fun setO v -> Set.union setO (allDescendants map v)) Set.empty s)
 
-let private mapClosure oldMap newMap key _ = Map.add key (Set.add key (allDescendants oldMap key)) newMap
+let private mapClosure oldMap newMap key _ = let collapsed = Map.add key (allDescendants oldMap key) newMap
+                                             Map.fold (fun m k vs -> mapAdd (Set.fold (fun m1 v -> mapAdd m1 (v,v)) m vs) (k,k)) collapsed collapsed
 
 let private securityLatticeT : Map<string,Set<string>> = Seq.fold (fun map str -> mapAdd map (getLevels str)) Map.empty latticeStrings
 let securityLattice = Map.fold (mapClosure securityLatticeT) Map.empty securityLatticeT
