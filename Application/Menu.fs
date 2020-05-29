@@ -16,7 +16,7 @@ open PrintSA
 open PrintPG
 open PrintExecution
 
-let private welcome = 
+let private welcome () = 
     printfn "Welcome to COMMOD!"
     printfn "This is a program for analysing programs written in a guarded command language."
     printfn "-------------------------------------------------------------------------------"
@@ -26,7 +26,7 @@ let private welcome =
     printfn "\"n\" for non-deterministic analysis."
     Console.ReadLine()
 
-let private chooseAnalysis = 
+let private chooseAnalysis () = 
     printfn "Choose an action to perform on the GCP from the menu:"
     printfn "1. Construct an AST"
     printfn "2. Construct a program graph"
@@ -34,7 +34,7 @@ let private chooseAnalysis =
     printfn "4. Trace step-wise execution"
     printfn "5. Perform sign analysis"
     printfn "6. Perform security analysis"
-    printfn "7. Perform a model checking"
+    printfn "7. Exit program"
     Console.ReadLine()
 
 let private astChoice ast =
@@ -68,7 +68,7 @@ let private signChoice pg =
 let private secChoice pg =
     let actualFlows = flowsInPG pg
     let vios = violations actualFlows
-    printfn "\nFor this analysis to work correctly, lattices and classifications has to be defined in the file corresponding files."
+    printfn "\nFor this analysis to work correctly, lattices and classifications has to be defined in the corresponding files."
     printfn "Allowed flows:"
     printFlows allowedFlows
     printfn "--------------"
@@ -87,31 +87,33 @@ let private secChoice pg =
     printfn "\n"
 
 
-let private modelChoice pg =
-    printfn "Not yet implemented"
-
-let startDialogue = 
-    let determinism = welcome
-    let analysis = chooseAnalysis
+let rec startDialogue () = 
+    let determinism = welcome ()
+    let mutable analysis = "0"
     let AST = parse program
+    let mutable PG = Set.empty
+    let mutable stop = false
 
-    if analysis = "1" then
-        astChoice AST
-    elif analysis = "2" then
-        let PG = AST2PG AST (determinism = "d")
-        pgChoice PG
-    elif analysis = "3" then
-        let PG = AST2PG AST (determinism = "d")
-        interpretChoice PG
-    elif analysis = "4" then
-        let PG = AST2PG AST (determinism = "d")
-        stepWiseChoice PG
-    elif analysis = "5" then
-        let PG = AST2PG AST (determinism = "d")
-        signChoice PG
-    elif analysis = "6" then
-        let PG = AST2PG AST (determinism = "d")
-        secChoice PG
-    elif analysis = "7" then
-        let PG = AST2PG AST (determinism = "d")
-        modelChoice PG
+    try
+        PG <- AST2PG AST (determinism = "d")
+    with
+    | ErrorInTreeException _ -> printf "There are errors in the AST. Other choices than 1. will not work correctly"
+
+    while not stop do
+        analysis <- chooseAnalysis ()
+        if analysis = "1" then
+            astChoice AST
+        elif analysis = "2" then
+            pgChoice PG
+        elif analysis = "3" then
+            interpretChoice PG
+        elif analysis = "4" then
+            stepWiseChoice PG
+        elif analysis = "5" then
+            signChoice PG
+        elif analysis = "6" then
+            secChoice PG
+        elif analysis = "7" then
+            stop <- true
+        printfn "\n\n"
+        printfn "-----------------------------------"

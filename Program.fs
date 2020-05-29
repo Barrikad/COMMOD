@@ -4,5 +4,5 @@ open Menu
 
 [<EntryPoint>]
 let main argv =
-    startDialogue
+    startDialogue ()
     0
